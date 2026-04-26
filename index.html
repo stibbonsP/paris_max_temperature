@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris heatwaves</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
+
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+    .reveal h1 {font-size: 1.8em;  /* Headings relative to base */}
+    .reveal h2 {font-size: 1.4em;}
+    .reveal p {font-size: 1.1em;}
+    </style>
+
+    
+    <style>
+    .large { font-size: 2.5em !important; }
+    .medium { font-size: 1.1em !important; }
+    .small { font-size: 0.7em !important; }
+    .tiny { font-size: 0.4em !important; }
+    </style>
+
+    <style>
+    @keyframes bounce2 {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(10px); }
+    }
+    .scroll-down {
+        font-size: 0.4em !important;
+        position: fixed;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #888;
+        animation: bounce2 2s infinite;
+    }
+    </style>
+    
+    <style>
+    @keyframes bounce-right2 {
+        0%, 100% { transform: translateY(-50%) translateX(0) rotate(90deg); }
+        50% { transform: translateY(-50%) translateX(10px) rotate(90deg); }
+    }
+    .scroll-right {
+        font-size: 0.4em !important;
+        position: fixed;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        animation: bounce-right2 2s infinite;
+        /* pointer-events: none; */
+        /* z-index: 100; */
+    }
+    </style>
+
+    <style>
+    .img-nice {
+        border: 2px solid #8b0000;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+    }
+    
+    .img-nice:hover {
+        transform: scale(1.02);
+    }
+    </style>
+    
+    <!-- <svg style="position: fixed; top: 10px; left: 10px; width: 100px; height: 100px; border: 2px solid red; z-index: 9999;"> -->
+    <svg style="width: 0; height: 0;">
+        <defs>
+            <marker id="arrowheadperso" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                <polygon points="0 0, 5 2.5, 0 5" fill="#8b0000"/>
+            </marker>
+        </defs>
+    </svg>
+    
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <section style="padding-right: 25%;">
+                
+                    <h1>Forecasts of maximal annual temperature in Paris</h1>
+                    <p> CFM Resilience Lab</p>
+                <!-- 
+<svg style="width: 400px; height: 300px;">
+    <line x1="50" y1="50" x2="350" y2="250" stroke="#8b0000" stroke-width="3" marker-end="url(#arrowheadperso)"/>
+</svg> -->
+                    <div class="scroll-right">Press ↑ to navigate the presentation</div>
+
+            </section>
+            
+            <section>
+                
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <p>What is the probability that we reach 50°C in Paris in 10 years? <span class="fragment fade-in">Or before the end of the century?</span></p>
+                            <p class="fragment fade-in">We will try to provide a quantitative answer.</p>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/Paris_50C.png" alt="Paris_50C.png" class="img-nice" 
+                                 style="width: 100%; border-radius: 10px;">
+                        </div>
+                    </div>
+                
+            </section>
+            
+            <section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <h1>Defining Temperature</h1>
+                            <p style="text-align: left;"> We take as reference the temperature recorded by the Meteo France station in Parc Montsouris</p>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/photo_paris_montsouris.jpeg" alt="photo_paris_montsouris.jpeg"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                            <img src="images/map_montsouris.png" alt="map_montsouris.png"  class="img-nice"
+                                 style="width: 60%; border-radius: 1px;">
+                        </div>
+                    </div>
+                    <p class="scroll-down">
+                        Press ↓ for details
+                    </p>
+                </section>
+
+                <section>
+                    <p class="small"> We have data for maximal daily temperature since 1985:</p>
+                    <div style="flex: 1;">
+                            <img src="images/montsouris_max_T_daily.png" alt="montsouris_max_T_daily.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                    </div>
+                    <p class="small"> ...with some gaps (source: <a href="https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station" data-preview-link>NOAA</a>)</p>
+                </section>
+
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <ul class="small">
+                                <li>The highest temperature reached during the 20th century is 40.4°C on July 28th, 1947</li>
+                                <li class="fragment fade-in" data-fragment-index="1">We can see an upward trend in recent data</li>
+                                <li class="fragment fade-in" data-fragment-index="2">We reached 42.6°C in 2019</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/montsouris_max_T_yearly.png" alt="montsouris_max_T_yearly.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; pointer-events: none !important;">
+
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <!-- <defs>
+                                    <marker id="arrowheadperso" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                                        <polygon points="0 0, 5 2.5, 0 5" fill="#8b0000"/>
+                                    </marker>
+                                </defs> -->
+                                <line class="fragment fade-out"  data-fragment-index="1" x1="50" y1="100" x2="440" y2="100" stroke="#8b0000" stroke-width="2" stroke-dasharray="5,5"/>
+                                <text class="fragment fade-out"  data-fragment-index="1" x="100" y="90" text-anchor="middle" fill="#8b0000" font-size="12"> 20th century record </text>
+                                <line  class="fragment fade-in-then-out"  data-fragment-index="1" x1="150" y1="200" x2="300" y2="100" stroke="#8b0000" stroke-width="2" marker-end="url(#arrowheadperso)"/>
+                                <circle class="fragment fade-in"  data-fragment-index="2" cx="378" cy="55" r="10" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+        
+            </section>
+
+            <section>
+                
+                <section>
+                    <h1>Our approach</h1>
+                    <p style="text-align: left;">How to estimate probabilities of future temperature records?</p>
+                   <ul class="small" style="text-align: left;">
+                        <li class="fragment fade-in" data-fragment-index="1"> We generate a random process mimicking the behavior of future daily temperatures </li>
+                        <li class="fragment fade-in" data-fragment-index="2"> We deduce probability density functions for observables of interests, for instance the probability to reach a given temperature threshold </li>
+                    </ul>
+                    <p class="scroll-down fragment fade-in" data-fragment-index="2">
+                        ↓ Why not rely on climate-models ? ↓ 
+                    </p>
+                </section>
+
+                <section>
+                    <ul class="small">
+                        <li>The standard approach is to rely on Global Climate Models simulations</li>
+                        <li>These can be downscaled to the regional scale</li>
+                    </ul>
+                    <div style="flex: 1;">
+                            <img src="images/vigue_et_al.png" alt="Paris_50C.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                    </div>
+                    <ul class="small">
+                        <li>We can then look for extreme events in the resulting simulation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Why are we looking for an alternative?</p>
+                    <ul class="small">
+                        <li class="fragment fade-in">Each simulation can take several months on powerful computers. This is a lengthy and expensive process.</li>
+                        <li class="fragment fade-in">We may need many simulations to infer density probability functions.</li>
+                        <li class="fragment fade-in">Parametrizing, running and interpreting these simulations requires sharp expertise in climate models.</li>
+                    </ul>
+                    <p class="medium fragment fade-in" style="text-align: left;">The data-driven approach we explore is much quicker and cheaper.</p>
+                    <p class="medium fragment fade-in" style="text-align: left;">It easily provides probability density functions instead of individual realizations.</p>
+                </section>
+                
+            </section>
+
+            <section data-transition="slide-in fade-out">
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <p>To build synthetic temperature data, we combine three components:</p>
+                            <ul class="small">
+                                <li class="fragment fade-in" data-fragment-index="1"> A trend representing the impact of global warming </li>
+                                <li class="fragment fade-in" data-fragment-index="2"> A seasonal pattern </li>
+                                <li class="fragment fade-in" data-fragment-index="3"> Random fluctuations </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/synthetic_temperature.png" alt="synthetic_temperature.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px;">
+                            <p class="tiny fragment fade-in" data-fragment-index="1">=</p>
+                            <img src="images/synthetic_temperature_warming.png" alt="synthetic_temperature_warming.png"  class="img-nice fragment fade-in" data-fragment-index="1"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px;">
+                            <p class="tiny fragment fade-in" data-fragment-index="2">+</p>
+                            <img src="images/synthetic_temperature_seasonal.png" alt="synthetic_temperature_seasonal.png"  class="img-nice fragment fade-in" data-fragment-index="2"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px;">
+                            <p class="tiny fragment fade-in" data-fragment-index="3">+</p>
+                            <img src="images/synthetic_temperature_noise.png" alt="synthetic_temperature_noise.png"  class="img-nice fragment fade-in" data-fragment-index="3"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px;">
+                        </div>
+                    </div>
+                </section>
+                
+            </section>
+
+            <section data-transition="fade">
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <h1>The global warming trend</h1>
+                            <p class="small fragment fade-in" data-fragment-index="1">
+                                We estimate that temperatures in Paris increase at a rate of \(\approx\) 7°C per century, almost 3 times faster than the world average</li>
+                            </p>
+                            <p class="scroll-down fragment fade-in" data-fragment-index="1">
+                                Surprised or sceptical? Press ↓ for details
+                            </p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/synthetic_temperature.png" alt="synthetic_temperature.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">=</p>
+                            <img src="images/synthetic_temperature_warming.png" alt="synthetic_temperature_warming.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 1;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_seasonal.png" alt="synthetic_temperature_seasonal.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_noise.png" alt="synthetic_temperature_noise.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                        </div>
+                    </div>
+                </section>
+
+                <section data-transition="slide-in fade-out">
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p>First we need a fit for global warming</p>
+                            <ul class="small">
+                                <li>We download historical data (<a href="https://ourworldindata.org/grapher/temperature-anomaly" data-preview-link>ourworldindata.org</a>)</li>
+                                <li style="visibility: hidden;"> We fit with the following functional form: $$y = \frac{1}{2} \left( a(t - t_0) + \sqrt{a^2(t - t_0)^2 + r^2} \right) $$</li>
+                                <li style="visibility: hidden;"> We find \(a \approx 0.025\)°C / year, \(t_0 \approx 1975\), \(r \approx 0.7\)</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1.2;">
+                            <img src="images/global_warming.png" alt="global_warming.png"  class="img-nice"
+                                 style="border-radius: 1px; width: 100%;">
+                        </div>
+                    </div>
+                </section>
+
+                <section data-transition="fade-in slide-out">
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p>First we need a fit for global warming</p>
+                            <ul class="small">
+                                <li>We download historical data (<a href="https://ourworldindata.org/grapher/temperature-anomaly" data-preview-link>ourworldindata.org</a>)</li>
+                                <li> We fit with the following functional form: $$y = \frac{1}{2} \left( a(t - t_0) + \sqrt{a^2(t - t_0)^2 + r^2} \right) $$</li>
+                                <li class="fragment fade-in" data-fragment-index="1"> We find \(a \approx 0.025\)°C / year, \(t_0 \approx 1975\), \(r \approx 0.7\)</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- <div style="flex: 1.2;">
+                            <img src="images/global_warming_fit.png" alt="global_warming_fit.png"  class="img-nice"
+                                 style="border-radius: 1px; width: 100%;">
+                        </div>                         -->
+                        <div style="flex: 1.2; position: relative">
+                            <img src="images/global_warming_fit.png" alt="global_warming_fit.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; pointer-events: none !important;">
+
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <text class="fragment fade-in"  data-fragment-index="1" x="90" y="165" text-anchor="right" fill="#8b0000" font-size="12"> 2.5°C per century </text>
+                                <line class="fragment fade-in"  data-fragment-index="1" x1="160" y1="200" x2="200" y2="150" stroke="#8b0000" stroke-width="2" marker-end="url(#arrowheadperso)"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p>Is it realistic to assume linear warming until the end of the century?</p>
+                           <ul class="small">
+                                <li class="fragment fade-in" data-fragment-index="1">This scenario lies in-between the "<span style="color:darkorange">intermediate</span>" and "<span style="color:red">high</span>" scenarios of the IPCC</li>
+                                <li class="fragment fade-in" data-fragment-index="2">The "<span style="color:darkorange">intermediate</span>" scenario feels quite optimistic given the current GHG emission reduction rate</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="images/global_warming_ipcc_scenarios.png" alt="global_warming_ipcc_scenarios.png"  class="img-nice"
+                                 style="width: 80%; border-radius: 1px; margin-bottom: -30px;">
+                            <p><a class="tiny" href="https://www.ipcc.ch/report/ar6/syr/figures/figure-spm-4y" data-preview-link>IPCC AR6 Synthesis Report</a></p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="slide-in fade-out">
+                    <p> The next step is to fit the warming rate in Paris compared to global warming </p>
+                    <ul class="small">
+                        <li style="visibility: hidden;"> We perform the linear regression: <span style="font-size: 0.9em !important"> $$ \min_{c,\ T_0} \left(\mathrm{Paris\ temperature} - c \left(\mathrm{Global\ Warming}\right) - T_0 \right)^2 $$</span>  </li>
+                        <li style="visibility: hidden;"> We find \(c \approx \)<span style="color:red; font-weight: bold;"> 2.8</span>, \(T_0 \approx 14.4\)°C</li>
+                    </ul>
+
+                    <div style="flex: 1;">
+                            <img src="images/montsouris_max_T_daily.png" alt="montsouris_max_T_daily.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                    </div>
+                </section>
+                
+                <section data-transition="fade-in slide-out">
+                    <p> The next step is to fit the warming rate in Paris compared to global warming </p>
+                    <ul class="small">
+                        <li> We perform the linear regression: <span style="font-size: 0.9em !important"> $$ \min_{c,\ T_0} \left(\mathrm{Paris\ temperature} - c \left(\mathrm{Global\ Warming}\right) - T_0 \right)^2 $$</span> </li>
+                        <li class="fragment fade-in" data-fragment-index="1"> We find \(c \approx \)<span style="color:red; font-weight: bold;"> 2.8</span>, \(T_0 \approx 14.4\)°C</li>
+                    </ul>
+
+                    <div style="flex: 1;">
+                            <img src="images/paris_warming_fit.png" alt="paris_warming_fit.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                    </div>
+                </section>
+                
+                <section>
+                    <p style="text-align: left;">The factor 2.8 we fitted is surprisingly high.</p>
+                    <p style="text-align: left;">To challenge our result, we repeat this fit with different data: the ERA5 temperatures for many locations in France.</p>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                           <ul class="small">
+                                <li class="fragment fade-in" data-fragment-index="1">On average, warming is twice faster in France than the world average, with significant geographic variations</li>
+                                <li class="fragment fade-in" data-fragment-index="2">Around Paris, we obtain a factor close to 2</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/ERA5_warming_fit.png" alt="ERA5_warming_fit.png"  class="img-nice fragment fade-in" data-fragment-index="1"
+                                 style="width: 80%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle class="fragment fade-in"  data-fragment-index="2" cx="220" cy="100" r="10" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <p style="text-align: left;"> So, which value should we trust between 2 and 2.8? </p>
+                    <ul class="small">
+                       <li class="fragment fade-in" data-fragment-index="1"> Large cities warm faster than their neighborhing countryside, by a factor \(\approx 1.3\) (<a href="https://www.nature.com/articles/s43247-022-00539-x" data-preview-link>Liu, Z., Zhan, W., Bechtel, B. et al</a>)  </li>
+                    </ul>
+                    <div style="display: flex; gap: 40px; align-items: center;" class="fragment fade-in" data-fragment-index="2">
+                        <div style="flex: 2;">
+                            <ul class="small">
+                               <li > The methodology used to build the ERA5 data makes it rather blind to the <span style="color:red;">Urban Heat Island effect</span>, which is responsible for this increased warming rate</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <p class="small"> $$ 2 \times 1.3 = 2.6 $$ </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 40px; align-items: center;" class="fragment fade-in" data-fragment-index="3">
+                        <div style="flex: 1.5;">
+                            <ul class="small">
+                               <li> The <span style="color:red;">Urban Heat Island effect</span> effect is particularly strong in Paris</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <p class="small"> $$ 2 \times \left(1.3 + \mathrm{Paris\ bonus}\right) \approx 2.8? $$ </p>
+                        </div>
+                    </div>
+                    <p class="fragment fade-in" data-fragment-index="4"> All in all, this makes the factor 2.8 rather plausible </p>
+                </section>
+
+            </section>
+
+            <section data-transition="fade">
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <h1>The seasonal pattern</h1>
+                           <p class="small fragment fade-in" data-fragment-index="1">
+                                This is simply modeled by a combination of sinusoidal functions
+                            </p>
+                            <p class="scroll-down fragment fade-in" data-fragment-index="1">
+                                Again, details below ↓
+                            </p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/synthetic_temperature.png" alt="synthetic_temperature.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">=</p>
+                            <img src="images/synthetic_temperature_warming.png" alt="synthetic_temperature_warming.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_seasonal.png" alt="synthetic_temperature_seasonal.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 1;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_noise.png" alt="synthetic_temperature_noise.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="slide-in fade-out">
+                    <p class="small" style="text-align: left"> We fit the seasonal pattern with two cosine functions (first two Fourier modes) of periods 1 year and 6 months </p>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                           <ul class="small">
+                                <li style="visibility: hidden;"> We perform the linear regression: <span style="font-size: 0.6em;">$$ \min_{A_1,\ A_2,\ t_1,\ t_2} \left(\tilde{T} - A_1 \cos\left(\frac{t-t_1}{1\ \mathrm{year}}\right) - A_2 \cos\left(\frac{t-t_2}{6\ \mathrm{months}}\right) \right)^2 $$  </span>
+                                where \(\tilde{T}\) is the Paris temperature minus the previously fitted global warming</li>
+                               <li style="visibility: hidden;"> We find \(A_1 \approx 9.4\)°C and \(A_2 \approx 0.9\)°C </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/paris_seasonal.png" alt="paris_seasonal.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="fade-in slide-out">
+                    <p class="small" style="text-align: left"> We fit the seasonal pattern with two cosine functions (first two Fourier modes) of periods 1 year and 6 months </p>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                           <ul class="small">
+                                <li> We perform the linear regression: <span style="font-size: 0.6em;">$$ \min_{A_1,\ A_2,\ t_1,\ t_2} \left(\tilde{T} - A_1 \cos\left(\frac{t-t_1}{1\ \mathrm{year}}\right) - A_2 \cos\left(\frac{t-t_2}{6\ \mathrm{months}}\right) \right)^2 $$  </span>
+                                where \(\tilde{T}\) is the Paris temperature minus the previously fitted global warming</li>
+                               <li class="fragment fade-in" data-fragment-index="1"> We find \(A_1 \approx 9.4\)°C and \(A_2 \approx 0.9\)°C </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/paris_seasonal_fit.png" alt="paris_seasonal_fit.png"  class="img-nice" 
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <p class="small"> We check on the ERA5 data that this two-mode seasonal fit generally captures most of the seasonal pattern </p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_seasonal_fit_residual.png" alt="ERA5_seasonal_fit_residual.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section data-transition="fade-in slide-out">
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;">
+                            <h1>The residual noise</h1>
+                            <p class="small fragment fade-in" data-fragment-index="1">
+                                It is surprisingly well modeled by an auto-regressive process
+                            </p>
+                            <p class="scroll-down fragment fade-in" data-fragment-index="1">
+                                Again, details below ↓
+                            </p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/synthetic_temperature.png" alt="synthetic_temperature.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">=</p>
+                            <img src="images/synthetic_temperature_warming.png" alt="synthetic_temperature_warming.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_seasonal.png" alt="synthetic_temperature_seasonal.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 0.3;">
+                            <p class="tiny" style="opacity: 0.3;">+</p>
+                            <img src="images/synthetic_temperature_noise.png" alt="synthetic_temperature_noise.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px; margin-top: -20px; margin-bottom: -30px; opacity: 1;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <img src="images/paris_residual_T.png" alt="paris_residual_T.png"  class="img-nice"
+                         style="width: 70%; border-radius: 1px;">
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                           <p class="small" style="text-align: left">
+                                The distribution of residuals is well appproximated by a Gaussian with standard deviation \(\approx\) 3.9°C
+                            <p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/paris_residual_T_hist.png" alt="paris_residual_T_hist.png"  class="img-nice"
+                                 style="width: 80%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        <div style="flex: 1;">
+                           <p class="small">
+                                This remains true for all ERA5 temperature time series.
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_std.png" alt="ERA5_residual_std.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        <div style="flex: 1;">
+                           <p class="small">
+                               Notice that the left-hand side of the distribution appears to be slightly distorted.
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_T_hist.png" alt="ERA5_residual_T_hist.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="slide-in fade-out">
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        <div style="flex: 1;">
+                           <p class="small">
+                            Since we mostly care about temperature extremes, the fit of the right tail is crucial.
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_T_hist_log.png" alt="ERA5_residual_T_hist_log.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="fragment fade-in" data-fragment-index="1">
+                        <div style="flex: 1;">
+                           <p class="small">
+                            Actually when restricting to the Summer period, we find a bit of positive skew in the distribution.
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_T_hist_log_summer.png" alt="ERA5_residual_T_hist_log_summer.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="fade-in slide-out">
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        <div style="flex: 1;">
+                           <p class="small">
+                            Since we mostly care about temperature extremes, the fit of the right tail is crucial.
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_T_hist_log.png" alt="ERA5_residual_T_hist_log.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        <div style="flex: 1;">
+                            <p class="small">
+                            We obtain a good fit for the Summer right tail when boosting the volatility by 10%
+                            <p>
+                        </div>
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/ERA5_residual_T_hist_log_summer_2.png" alt="ERA5_residual_T_hist_log_summer_2.png"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="small">
+                        <div style="flex: 1;">
+                            <p> The auto-correlation of the residual is reasonably well fitted with a single exponential.</p>
+                            <p> The timescale is \(\approx 3.5\) days.</p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/paris_residual_autocorr.png" alt="paris_residual_autocorr.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="small">
+                        <div style="flex: 1;">
+                            <p> Somewhat unexpectedly (for us), the magnitude of temperature fluctuations is hardly affected by global warming.</p>
+                            <p> We estimate that the std of the residual increased by \(\approx\) 5% over 75 years.</p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/residual_std_stationarity.png" alt="residual_std_stationarity.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section style="text-align: left;">
+                
+                <section>
+                    <h1 style="text-align: right;">Results</h1>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p class="small"> Our main result is the probability to reach at least once a given temperature during a given year</p>
+                            <p class="small"> <span class="fragment fade-in" data-fragment-index="1">The warmest summers of the 20th-century will be usual by 2050...</span> <span class="fragment fade-in" data-fragment-index="2">and fresh by the end of the century</span></p>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/proba_max_annual_T.png" alt="proba_max_annual_T.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle class="fragment fade-in-then-out"  data-fragment-index="1" cx="135" cy="180" r="30" fill="none" stroke="#8b0000" stroke-width="2"/>
+                                <circle class="fragment fade-in"  data-fragment-index="2" cx="330" cy="70" r="30" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p class="small"> This can be integrated to get the probability to reach at least once a given temperature before a given year</p>
+                            <p class="small fragment fade-in" data-fragment-index="1"> It seems unlikely that any of us will witness 50°C in Paris</p>
+                        </div>
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/proba_max_annual_T_once.png" alt="proba_max_annual_T_once.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle class="fragment fade-in-then-out"  data-fragment-index="1" cx="330" cy="270" r="30" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="slide-in fade-out">
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p class="small"> Here is the probability density function we obtain for the maxmial temperature reached in 2026 </p>
+                            <p class="small" style="visibility: hidden;"> The probability to exceed the 2003 maximum is \(\approx\) 20% </p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="images/Tmax_2026_pdf.png" alt="Tmax_2026_pdf.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section data-transition="fade-in slide-out">
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p class="small"> Here is the probability density function we obtain for the maxmial temperature reached in 2026 </p>
+                            <p class="small"> The probability to exceed the 2003 maximum is \(\approx\) 20% </p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="images/Tmax_2026_pdf_vs_2003.png" alt="Tmax_2026_pdf_vs_2003.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section>
+                
+                <section>
+                    <h1>Risk of schools closure</h1>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1; text-align: left;" class="small">
+                            <p> Schools may have to close when the temperature is too high </p>
+                            <p> Our method easily generalizes to get the probability of reaching at least once a given temperature during a given year outside of the Summer holidays</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="images/proba_max_annual_T_once_outside_summer_holidays.png" alt="proba_max_annual_T_once_outside_summer_holidays.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <p class="small" style="text-align: left;"> To estimate the risk of schools having to close outside of Summer holidays, we refer to 2019: </p>
+                    <img src="images/2019_school_closure.png" alt="2019_school_closure.png" class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                    <p class="small"> In June, the temperature reached 36°C and some schools had to close.</p>
+                </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p class="small" style="text-align: left;"> For 2026, we estimate above 40% the probability of reaching a higher temperature than in 2019 outside of the Summer holidays.
+                            </p>
+                        </div>
+                        <div style="flex: 1;">
+                            <img src="images/2026_proba_school_closure.png" alt="2026_proba_school_closure.png"  class="img-nice"
+                                 style="width: 100%; border-radius: 1px;">
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+
+            <section>
+                
+                <section>
+                    <h1>Thanks You</h1>
+                    <h2>CFM Resilience Lab</h2>
+                </section>
+
+            </section>
+
+
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize();
+    </script>
+</body>
+</html>
