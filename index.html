@@ -191,17 +191,16 @@
                 </section>
 
                 <section>
-                    <ul class="small">
+                    <ul class="small" style="text-align: left;">
                         <li>The standard approach is to rely on Global Climate Models simulations</li>
                         <li>These can be downscaled to the regional scale</li>
-                    </ul>
-                    <div style="flex: 1;">
-                            <img src="images/vigue_et_al.png" alt="Paris_50C.png"  class="img-nice"
-                                 style="width: 70%; border-radius: 1px;">
-                    </div>
-                    <ul class="small">
                         <li>We can then look for extreme events in the resulting simulation</li>
                     </ul>
+                    <div style="flex: 1;">
+                            <img src="images/vigue_et_al.jpeg" alt="vigue_et_al.jpeg"  class="img-nice"
+                                 style="width: 70%; border-radius: 1px;">
+                            <p class="tiny">Heat wave simulations from <a href="https://iopscience.iop.org/article/10.1088/1748-9326/ab6a24" data-preview-link>Viguié et al.</a></p>
+                    </div>
                 </section>
 
                 <section>
@@ -209,7 +208,7 @@
                     <ul class="small">
                         <li class="fragment fade-in">Each simulation can take several months on powerful computers. This is a lengthy and expensive process.</li>
                         <li class="fragment fade-in">We may need many simulations to infer density probability functions.</li>
-                        <li class="fragment fade-in">Parametrizing, running and interpreting these simulations requires sharp expertise in climate models.</li>
+                        <li class="fragment fade-in">Parametrizing, running and interpreting these simulations require sharp expertise in climate models.</li>
                     </ul>
                     <p class="medium fragment fade-in" style="text-align: left;">The data-driven approach we explore is much quicker and cheaper.</p>
                     <p class="medium fragment fade-in" style="text-align: left;">It easily provides probability density functions instead of individual realizations.</p>
@@ -532,7 +531,10 @@
                          style="width: 70%; border-radius: 1px;">
                     <div style="display: flex; gap: 40px; align-items: center;">
                         <div style="flex: 1;">
-                           <p class="small" style="text-align: left">
+                            <p class="small" style="text-align: left">
+                                The difference between the data and the (global warming + seasonal) fit is the residual
+                            <p>
+                            <p class="small" style="text-align: left">
                                 The distribution of residuals is well appproximated by a Gaussian with standard deviation \(\approx\) 3.9°C
                             <p>
                         </div>
@@ -548,7 +550,7 @@
                     <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
                         <div style="flex: 1;">
                            <p class="small">
-                                This remains true for all ERA5 temperature time series.
+                                This remains true for all ERA5 temperature time series, with some dispertion in the standard deviations.
                             <p>
                         </div>
                         <div style="flex: 1; gap: 0px;">
@@ -576,9 +578,12 @@
                             Since we mostly care about temperature extremes, the fit of the right tail is crucial.
                             <p>
                         </div>
-                        <div style="flex: 1; gap: 0px;">
+                        <div style="flex: 1; gap: 0px; position: relative;">
                             <img src="images/ERA5_residual_T_hist_log.png" alt="ERA5_residual_T_hist_log.png"  class="img-nice"
                                  style="width: 70%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;" class="fragment fade-out" data-fragment-index="1">
+                                <circle cx="280" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
                         </div>
                     </div>
                     <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="fragment fade-in" data-fragment-index="1">
@@ -587,9 +592,12 @@
                             Actually when restricting to the Summer period, we find a bit of positive skew in the distribution.
                             <p>
                         </div>
-                        <div style="flex: 1; gap: 0px;">
+                        <div style="flex: 1; gap: 0px; position: relative;">
                             <img src="images/ERA5_residual_T_hist_log_summer.png" alt="ERA5_residual_T_hist_log_summer.png"  class="img-nice"
                                  style="width: 70%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle cx="280" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
                         </div>
                     </div>
                 </section>
@@ -650,9 +658,231 @@
             </section>
 
             <section style="text-align: left;">
+
+                <section>
+
+                    <p> Can this method really capture the increase of extreme event induced by global warming?</p>
+
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="small fragment fade-in" data-fragment-index="1">
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+
+                        <div style="flex: 1;">
+                            <p> We can reproduce the extreme temperature events statistics obtained from GCM simulations.</p>
+                            <p> These are ruled by the <span>shift of the mean</span> much more than by a change of the shape of the distribution.</p>
+                        </div>
+                    </div>
+
+                    <p class="scroll-down" class="fragment fade-in" data-fragment-index="1">
+                        More details below ↓ 
+                    </p>
+
+                </section>
+
+                <section data-transition="slide-in fade-out">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_freq_increase_0.0deg_10y.png" alt="extreme_freq_increase_0.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle cx="145" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_freq_increase_1.0deg_10y.png" alt="extreme_freq_increase_1.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle cx="219" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_freq_increase_1.5deg_10y.png" alt="extreme_freq_increase_1.5deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle cx="294" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_freq_increase_2.0deg_10y.png" alt="extreme_freq_increase_2.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 400px;">
+                                <circle cx="367" cy="225" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_freq_increase_4.0deg_10y.png" alt="extreme_freq_increase_4.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 450px;">
+                                <circle cx="145" cy="370" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_magnitude_increase_1.0deg_10y.png" alt="extreme_magnitude_increase_1.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 450px;">
+                                <circle cx="219" cy="370" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_magnitude_increase_1.5deg_10y.png" alt="extreme_magnitude_increase_1.5deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 450px;">
+                                <circle cx="294" cy="370" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_magnitude_increase_2.0deg_10y.png" alt="extreme_magnitude_increase_2.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+                <section data-transition="fade">
+
+                    <p class="small"> We generate synthetic temperature time series. For the residual, we chose a standard deviation of 3°C plus 3.5% per degree of warming.</p>
+                    <p class="tiny"> These values a slightly different from the one fitted for Paris. It is not surprising that we need to tune these parameters since the IPCC statistics relies on worldwide simulations.</p>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
+                        
+                        <div style="flex: 1; position: relative;">
+                            <img src="images/IPCC_extremes_10y.png" alt="IPCC_extremes_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                            <svg style="position: absolute; top: 0px; left: 0px; width: 500px; height: 450px;">
+                                <circle cx="367" cy="370" r="40" fill="none" stroke="#8b0000" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/extreme_magnitude_increase_4.0deg_10y.png" alt="extreme_magnitude_increase_4.0deg_10y.png"  class="img-nice"
+                                 style="width: 90%; border-radius: 1px;">
+                        </div>
+                    </div>
+
+                </section>
+
+            </section>
+
+            <section style="text-align: left;">
                 
                 <section>
-                    <h1 style="text-align: right;">Results</h1>
+                    <h1 style="text-align: center;">Results</h1>
                     <div style="display: flex; gap: 40px; align-items: center;">
                         <div style="flex: 1;">
                             <p class="small"> Our main result is the probability to reach at least once a given temperature during a given year</p>
