@@ -170,6 +170,21 @@
                         Press ↓ for details
                     </p> -->
                 </section>
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p style="text-align: left;" class="small"> The Urban Heat Island effect is particularly pronounced in Paris. There is a strong temperature gradient towards the center of the city.</p>
+                            <p style="text-align: left;" class="small">The temperature measured in the streets can be much higher than the one recorded in Montsouris.</p>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <img src="images/UHI_illustration.png" alt="UHI_illustration.png"  class="img-nice"
+                                 style="width: 100%;">
+                            <p class="tiny">Illustration of the Urban Heat Island effect</p>
+                        </div>
+                    </div>
+                </section>
 
                 <section>
                     <p class="small"> We have data for maximal daily temperature since 1985:</p>
@@ -212,8 +227,9 @@
                     <h1>Our approach</h1>
                     <p style="text-align: left;">How to estimate probabilities of future temperature records?</p>
                    <ul class="small" style="text-align: left;">
-                        <li class="fragment fade-in" data-fragment-index="1"> We generate a random process mimicking the behavior of future daily temperatures </li>
-                        <li class="fragment fade-in" data-fragment-index="2"> We deduce probability density functions for observables of interests, for instance the probability to reach a given temperature threshold </li>
+                        <li class="fragment fade-in" data-fragment-index="1"> We estimate the statistical properties of daily temperatures </li>
+                        <li class="fragment fade-in" data-fragment-index="2"> We generate random processes mimicking the behavior of future temperatures </li>
+                        <li class="fragment fade-in" data-fragment-index="3"> We deduce probability density functions for observables of interests, for instance the probability to reach a given temperature threshold </li>
                     </ul>
                     <!-- <p class="scroll-down fragment fade-in" data-fragment-index="2">
                         ↓ Why not rely on climate-models ? ↓ 
@@ -554,6 +570,9 @@
                            <p class="small">
                                Notice that the left-hand side of the distribution appears to be slightly distorted.
                             <p>
+                           <p class="small">
+                            Since we mostly care about temperature extremes, the fit of the right tail is the most important for us.
+                            <p>
                         </div>
                         <div style="flex: 1; gap: 0px;">
                             <img src="images/ERA5_residual_T_hist.png" alt="ERA5_residual_T_hist.png"  class="img-nice"
@@ -562,7 +581,7 @@
                     </div>
                 </section>
                 
-                <section>
+                <!-- <section>
                     <div style="display: flex; gap: 40px; align-items: center; text-align: left;">
                         <div style="flex: 1;">
                            <p class="small">
@@ -596,6 +615,20 @@
                             </svg>
                         </div>
                     </div>
+                </section> -->
+                
+                <section>
+                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="small">
+                        <div style="flex: 1;">
+                            <p> Somewhat unexpectedly (for us), the magnitude of temperature fluctuations is hardly affected by global warming.</p>
+                            <p> We estimate that the std of the residual increased by \(\approx\) 5% over 75 years.</p>
+                        </div>
+                        
+                        <div style="flex: 1; gap: 0px;">
+                            <img src="images/residual_std_stationarity.png" alt="residual_std_stationarity.png"  class="img-nice"
+                                 style="width: 90%;">
+                        </div>
+                    </div>
                 </section>
                 
                 <section>
@@ -607,20 +640,6 @@
                         
                         <div style="flex: 1; gap: 0px;">
                             <img src="images/paris_residual_autocorr.png" alt="paris_residual_autocorr.png"  class="img-nice"
-                                 style="width: 90%;">
-                        </div>
-                    </div>
-                </section>
-                
-                <section>
-                    <div style="display: flex; gap: 40px; align-items: center; text-align: left;" class="small">
-                        <div style="flex: 1;">
-                            <p> Somewhat unexpectedly (for us), the magnitude of temperature fluctuations is hardly affected by global warming.</p>
-                            <p> We estimate that the std of the residual increased by \(\approx\) 5% over 75 years.</p>
-                        </div>
-                        
-                        <div style="flex: 1; gap: 0px;">
-                            <img src="images/residual_std_stationarity.png" alt="residual_std_stationarity.png"  class="img-nice"
                                  style="width: 90%;">
                         </div>
                     </div>
@@ -798,7 +817,7 @@
                 <section>
                     <h1>Conclusions</h1>
                     <ul class="small">
-                    <li class="fragment">Estimates of future temperature probabilities are not easy to access</li>
+                    <li class="fragment">Estimates of future temperature probabilities are useful and not easy to access</li>
                     <li class="fragment">Our quant toolbox is relevant. Temperatures are more Gaussian than prices.</li>
                     <li class="fragment">"More extreme temperature events" essentially come from a shift of mean...</li>
                     <li class="fragment">...but the mean moves fast & the distribution is narrow!</li>
@@ -809,6 +828,7 @@
 
             <section>
                 
+
                 <section>
                     <h1>Thank You</h1>
 
